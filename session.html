@@ -1,103 +1,120 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  font-family: Inter, Arial, sans-serif;
-  color: #e5e7eb;
+
+html,body{
+margin:0;
+padding:0;
+background:transparent;
+font-family:Inter,Arial;
 }
-.card {
-  background: #0b1220;
-  border-radius: 14px;
-  padding: 14px;
+
+.card{
+background:#0b1220;
+border-radius:14px;
+padding:14px;
+color:#e5e7eb;
 }
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+
+.time{
+font-size:22px;
+font-weight:700;
+margin-bottom:10px;
 }
-.title {
-  font-size: 13px;
-  color: #9ca3af;
-  font-weight: 600;
+
+.row{
+display:flex;
+justify-content:space-between;
+background:#111827;
+padding:10px;
+margin-top:6px;
+border-radius:10px;
 }
-.time {
-  font-size: 13px;
-  color: #e5e7eb;
+
+.active{
+color:#00a884;
+font-weight:700;
 }
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #111827;
-  border-radius: 10px;
-  padding: 9px 10px;
-  margin-top: 7px;
-  font-size: 13px;
+
+.inactive{
+color:#6b7280;
 }
-.status {
-  font-weight: 700;
-  font-size: 12px;
+
+.countdown{
+margin-top:12px;
+color:#9ca3af;
+font-size:13px;
 }
-.active {
-  color: #00a884;
-}
-.off {
-  color: #6b7280;
-}
+
 </style>
 </head>
+
 <body>
 
 <div class="card">
-  <div class="top">
-    <div class="title">Market Sessions</div>
-    <div class="time" id="localTime">--:--</div>
-  </div>
 
-  <div class="row">
-    <span>Tokyo</span>
-    <span id="tokyo" class="status">--</span>
-  </div>
+<div class="time" id="clock"></div>
 
-  <div class="row">
-    <span>London</span>
-    <span id="london" class="status">--</span>
-  </div>
+<div class="row">
+<span>Tokyo</span>
+<span id="tokyo"></span>
+</div>
 
-  <div class="row">
-    <span>New York</span>
-    <span id="newyork" class="status">--</span>
-  </div>
+<div class="row">
+<span>London</span>
+<span id="london"></span>
+</div>
+
+<div class="row">
+<span>New York</span>
+<span id="ny"></span>
+</div>
+
+<div class="countdown" id="countdown"></div>
+
 </div>
 
 <script>
-function updateSessions() {
-  const now = new Date();
-  const hour = now.getHours();
 
-  document.getElementById("localTime").textContent =
-    now.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+function update(){
 
-  setStatus("tokyo", hour >= 1 && hour < 9);
-  setStatus("london", hour >= 8 && hour < 17);
-  setStatus("newyork", hour >= 13 && hour < 22);
+const now=new Date();
+
+document.getElementById("clock").innerText=
+now.toLocaleTimeString("de-DE");
+
+const h=now.getHours();
+
+setStatus("tokyo",h>=1&&h<9);
+setStatus("london",h>=8&&h<17);
+setStatus("ny",h>=13&&h<22);
+
+let nextOpen=8;
+
+let diff=(nextOpen-h+24)%24;
+
+document.getElementById("countdown").innerText=
+"London Open in "+diff+"h";
+
 }
 
-function setStatus(id, active) {
-  const el = document.getElementById(id);
-  el.textContent = active ? "ACTIVE" : "OFF";
-  el.className = "status " + (active ? "active" : "off");
+function setStatus(id,state){
+
+let el=document.getElementById(id);
+
+el.innerText=state?"ACTIVE":"OFF";
+
+el.className=state?"active":"inactive";
+
 }
 
-updateSessions();
-setInterval(updateSessions, 1000);
+setInterval(update,1000);
+
+update();
+
 </script>
 
 </body>
