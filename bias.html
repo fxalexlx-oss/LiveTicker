@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: Inter, Arial, sans-serif;
+  color: #e5e7eb;
+}
+.card {
+  background: #0b1220;
+  border-radius: 14px;
+  padding: 14px;
+}
+.title {
+  font-size: 13px;
+  color: #9ca3af;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.score {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.label {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #9ca3af;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 7px;
+}
+button {
+  background: #111827;
+  color: #e5e7eb;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  padding: 9px 6px;
+  font-size: 12px;
+  cursor: pointer;
+}
+button:hover {
+  background: #1f2937;
+}
+.strong {
+  color: #00a884;
+}
+.weak {
+  color: #ff4d6d;
+}
+.neutral {
+  color: #d1d5db;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="title">USD Bias Engine</div>
+
+  <div class="score" id="score">50</div>
+  <div class="label" id="label">Neutral USD</div>
+
+  <div class="grid">
+    <button onclick="setBias(70)">USD Strong</button>
+    <button onclick="setBias(50)">Neutral</button>
+    <button onclick="setBias(30)">USD Weak</button>
+  </div>
+</div>
+
+<script>
+function setBias(value) {
+  localStorage.setItem("usdBias", value);
+  render(value);
+}
+
+function render(value) {
+  const score = document.getElementById("score");
+  const label = document.getElementById("label");
+
+  score.textContent = value;
+
+  score.className = "score";
+  label.className = "label";
+
+  if (value >= 65) {
+    score.classList.add("strong");
+    label.classList.add("strong");
+    label.textContent = "Strong USD Bias";
+  } else if (value <= 35) {
+    score.classList.add("weak");
+    label.classList.add("weak");
+    label.textContent = "Weak USD Bias";
+  } else {
+    score.classList.add("neutral");
+    label.classList.add("neutral");
+    label.textContent = "Neutral USD Bias";
+  }
+}
+
+const saved = localStorage.getItem("usdBias") || 50;
+render(saved);
+</script>
+
+</body>
+</html>
