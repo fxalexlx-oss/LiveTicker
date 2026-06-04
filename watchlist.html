@@ -1,73 +1,76 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TradingView Watchlist</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #131722;
-      overflow: hidden;
-    }
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #131722;
+    overflow: hidden;
+}
 
-    .tradingview-widget-container {
-      width: 100%;
-      height: 100vh;
-    }
+.widget {
+    width: 320px;
+    height: 800px;
+}
 
-    .tradingview-widget-container__widget {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+.tradingview-widget-container,
+.tradingview-widget-container__widget {
+    width: 100%;
+    height: 100%;
+}
+</style>
 </head>
 
 <body>
-  <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
 
-    <script
-      type="text/javascript"
-      src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js"
-      async>
-    {
-      "width": "100%",
-      "height": "100%",
-      "symbolsGroups": [
+<div class="widget">
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+
+        <script type="text/javascript"
+        src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js"
+        async>
         {
-          "name": "FOREX",
-          "symbols": [
-            { "name": "FX:EURUSD", "displayName": "EURUSD" },
-            { "name": "FX:GBPUSD", "displayName": "GBPUSD" },
-            { "name": "FX:USDJPY", "displayName": "USDJPY" },
-            { "name": "FX:USDCHF", "displayName": "USDCHF" },
-            { "name": "FX:AUDUSD", "displayName": "AUDUSD" },
-            { "name": "FX:USDCAD", "displayName": "USDCAD" },
-            { "name": "FX:NZDUSD", "displayName": "NZDUSD" }
-          ]
-        },
-        {
-          "name": "METALS",
-          "symbols": [
-            { "name": "OANDA:XAUUSD", "displayName": "XAUUSD" }
-          ]
-        },
-        {
-          "name": "KRYPTO",
-          "symbols": [
-            { "name": "BINANCE:BTCUSDT", "displayName": "BTCUSD" }
-          ]
+          "width": "100%",
+          "height": "100%",
+          "symbolsGroups": [
+            {
+              "name": "FOREX",
+              "symbols": [
+                {"name":"FX:EURUSD"},
+                {"name":"FX:GBPUSD"},
+                {"name":"FX:USDJPY"},
+                {"name":"FX:USDCHF"},
+                {"name":"FX:AUDUSD"},
+                {"name":"FX:USDCAD"},
+                {"name":"FX:NZDUSD"}
+              ]
+            },
+            {
+              "name": "METALS",
+              "symbols": [
+                {"name":"OANDA:XAUUSD"}
+              ]
+            },
+            {
+              "name": "KRYPTO",
+              "symbols": [
+                {"name":"BINANCE:BTCUSDT"}
+              ]
+            }
+          ],
+          "showSymbolLogo": true,
+          "isTransparent": false,
+          "colorTheme": "dark",
+          "locale": "de"
         }
-      ],
-      "showSymbolLogo": true,
-      "isTransparent": false,
-      "colorTheme": "dark",
-      "locale": "de"
-    }
-    </script>
-  </div>
+        </script>
+    </div>
+</div>
+
 </body>
 </html>
