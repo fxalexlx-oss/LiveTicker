@@ -2,63 +2,58 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-
 <style>
-
-html,
-body{
-    margin:0;
-    padding:0;
-    background:#0b1220;
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0b1220;
+  overflow: hidden;
 }
-
-/* Höhe bewusst größer als der Ticker */
-body{
-    height:140px;
-    overflow:hidden;
+.wrapper {
+  width: 100%;
+  height: 220px;
+  background: #0b1220;
+  border-radius: 18px;
+  overflow: hidden;
 }
-
-.top{
-    height:54px;
-    overflow:hidden;
-}
-
-.bottom{
-    height:86px;
-    background:#0b1220;
-}
-
 </style>
-
 </head>
-
 <body>
 
-<div class="top">
-
+<div class="wrapper">
 <script type="text/javascript"
-src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
 async>
 {
   "symbols": [
-    { "proName": "OANDA:EURUSD", "title": "EUR/USD" },
-    { "proName": "TVC:DXY", "title": "DXY" },
-    { "proName": "OANDA:USDJPY", "title": "USD/JPY" },
-    { "proName": "OANDA:XAUUSD", "title": "Gold" },
-    { "proName": "BITSTAMP:BTCUSD", "title": "BTC" },
-    { "proName": "SP:SPX", "title": "S&P500" }
+    ["DXY", "TVC:DXY"],
+    ["EUR/USD", "OANDA:EURUSD"],
+    ["USD/JPY", "OANDA:USDJPY"],
+    ["Gold", "OANDA:XAUUSD"],
+    ["BTC", "BITSTAMP:BTCUSD"],
+    ["S&P500", "SP:SPX"]
   ],
-  "showSymbolLogo": true,
-  "isTransparent": true,
-  "displayMode": "adaptive",
+  "chartOnly": false,
+  "width": "100%",
+  "height": "220",
+  "locale": "de",
   "colorTheme": "dark",
-  "locale": "de"
+  "autosize": false,
+  "showVolume": false,
+  "showMA": false,
+  "hideDateRanges": true,
+  "hideMarketStatus": true,
+  "hideSymbolLogo": false,
+  "scalePosition": "no",
+  "scaleMode": "Normal",
+  "fontFamily": "Arial",
+  "fontSize": "14",
+  "noTimeScale": true,
+  "valuesTracking": "0",
+  "changeMode": "price-and-percent"
 }
 </script>
-
 </div>
-
-<div class="bottom"></div>
 
 </body>
 </html>
