@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: Inter, Arial, sans-serif;
+  color: #e5e7eb;
+}
+.card {
+  background: #0b1220;
+  border-radius: 14px;
+  padding: 14px;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.title {
+  font-size: 13px;
+  color: #9ca3af;
+  font-weight: 600;
+}
+.time {
+  font-size: 13px;
+  color: #e5e7eb;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111827;
+  border-radius: 10px;
+  padding: 9px 10px;
+  margin-top: 7px;
+  font-size: 13px;
+}
+.status {
+  font-weight: 700;
+  font-size: 12px;
+}
+.active {
+  color: #00a884;
+}
+.off {
+  color: #6b7280;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="top">
+    <div class="title">Market Sessions</div>
+    <div class="time" id="localTime">--:--</div>
+  </div>
+
+  <div class="row">
+    <span>Tokyo</span>
+    <span id="tokyo" class="status">--</span>
+  </div>
+
+  <div class="row">
+    <span>London</span>
+    <span id="london" class="status">--</span>
+  </div>
+
+  <div class="row">
+    <span>New York</span>
+    <span id="newyork" class="status">--</span>
+  </div>
+</div>
+
+<script>
+function updateSessions() {
+  const now = new Date();
+  const hour = now.getHours();
+
+  document.getElementById("localTime").textContent =
+    now.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+
+  setStatus("tokyo", hour >= 1 && hour < 9);
+  setStatus("london", hour >= 8 && hour < 17);
+  setStatus("newyork", hour >= 13 && hour < 22);
+}
+
+function setStatus(id, active) {
+  const el = document.getElementById(id);
+  el.textContent = active ? "ACTIVE" : "OFF";
+  el.className = "status " + (active ? "active" : "off");
+}
+
+updateSessions();
+setInterval(updateSessions, 1000);
+</script>
+
+</body>
+</html>
